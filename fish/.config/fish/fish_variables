@@ -1,0 +1,4 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR __fish_initialized:4300
+SETUVAR fish_user_paths:/home/neo/Boxes/dev\x2dbox/\x2elocal/bin\x1e/home/neo/Boxes/dev\x2dbox/\x2ecargo/bin\x1e/usr/local/bin
