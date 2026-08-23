@@ -31,13 +31,6 @@ for  nerd_font in "${NERD_FONTS[@]}"; do
 done
 fc-cache -f "$NERD_FONTS_DIR" 2>/dev/null || true
 
-echo "==> Instalando Oh My Zsh"
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-else
-  echo "Oh My Zsh já instalado, pulando."
-fi
-
 echo "==> Instalando toolchain multi-linguagem"
 sudo dnf install -y \
   gcc gcc-c++ clang make cmake ninja-build pkgconf-pkg-config gdb valgrind \
