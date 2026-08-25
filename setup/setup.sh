@@ -33,7 +33,7 @@ fc-cache -f "$NERD_FONTS_DIR" 2>/dev/null || true
 
 echo "==> Instalando toolchain multi-linguagem"
 sudo dnf install -y \
-  gcc gcc-c++ clang make cmake ninja-build pkgconf-pkg-config gdb valgrind \
+  gcc gcc-c++ clang clang-tools-extra make cmake ninja-build pkgconf-pkg-config gdb valgrind \
   golang \
   java-latest-openjdk java-latest-openjdk-devel maven \
   python3 python3-pip python3-virtualenv python3-devel pipx
