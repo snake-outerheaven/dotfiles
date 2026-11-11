@@ -14,13 +14,14 @@ Guia para mexer nas cores sozinho. Tudo usa a paleta **Gruvbox dark** original (
 | Cinza | `#a89984` | `#928374` | Comentários, texto apagado |
 | Vermelho | `#cc241d` | `#fb4934` | Erros, palavras-chave |
 | Verde | `#98971a` | `#b8bb26` | Strings, sucesso |
-| Amarelo | `#d79921` | `#fabd2f` | **Destaque (janela ativa)** |
+| Amarelo | `#d79921` | `#fabd2f` | Amarelo do terminal |
+| Amarelo apagado (faded) | `#b57614` | — | **Destaque da barra (janela ativa)** |
 | Azul | `#458588` | `#83a598` | Links, tipos |
 | Roxo | `#b16286` | `#d3869b` | Constantes |
 | Ciano (aqua) | `#689d6a` | `#8ec07c` | Funções |
 | Laranja | `#d65d0e` | `#fe8019` | Avisos |
 
-**Normal** é a base. **Clara** é a versão "bright", para dar mais brilho.
+**Normal** é a base. **Clara** é a versão "bright", para dar mais brilho. **Apagada** (faded) é a versão mais escura, que o Gruvbox usa no tema claro; aqui ela serve de destaque discreto.
 
 ## dwm: `dwm/config.h`
 
@@ -29,7 +30,7 @@ static const char col_gray1[] = "#282828"; /* fundo da barra          */
 static const char col_gray2[] = "#504945"; /* borda da janela inativa */
 static const char col_gray3[] = "#ebdbb2"; /* texto da barra          */
 static const char col_gray4[] = "#282828"; /* texto sobre o destaque  */
-static const char col_cyan[]  = "#d79921"; /* destaque: tag ativa, título e borda ativa */
+static const char col_cyan[]  = "#b57614"; /* destaque: tag ativa, título e borda ativa (amarelo apagado) */
 ```
 
 Os nomes (`col_gray1`, `col_cyan`) vêm do dwm original. O nome não importa, o valor sim.
@@ -56,7 +57,8 @@ Saia do dwm (`Alt+Shift+q`) e rode `startx` de novo. O dwm não relê cores sem 
 
 | Quer o destaque em | Troque `col_cyan` por |
 |---|---|
-| Amarelo (atual) | `#d79921` |
+| Amarelo apagado (atual) | `#b57614` |
+| Amarelo normal | `#d79921` |
 | Amarelo claro | `#fabd2f` |
 | Azul | `#458588` |
 | Verde | `#98971a` |
