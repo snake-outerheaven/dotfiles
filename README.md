@@ -9,32 +9,19 @@ my dotfiles, to be used with [GNU stow](https://www.gnu.org/savannah-checkouts/g
 
 Both accept `--only c,rust,...` / `--skip ...`.
 
-## dwm (branch `dwm`): chadwm em Gruvbox
+## dwm (branch `dwm`)
 
-Base: [chadwm](https://github.com/siduck/chadwm), de siduck (licença MIT, em `chadwm/.config/chadwm/LICENSE`), um dwm 6.5 com patches (gaps, abas, barra colorida, ícones). Adaptado aqui para OpenBSD, Gruvbox escuro padrão (destaque amarelo), Cascadia Code e áreas de trabalho de I a IX.
+dwm 6.4 em Gruvbox escuro padrão (destaque amarelo), com fonte Cascadia Code e áreas de trabalho em algarismos romanos (I a IX), configurado para OpenBSD.
 
-- `chadwm/` – pacote do stow: vira `~/.config/chadwm/` (código em `chadwm/`, barra e autostart em `scripts/`).
-- `x11/` – pacote do stow: `.xinitrc` (chama o `run.sh`) e `.Xresources` (paleta Gruvbox completa).
-- `CORES.md` – guia de todas as cores.
+- `dwm/` – código-fonte do dwm com o `config.h` pronto. **Não é pacote do stow**: compila e instala.
+- `x11/` – pacote do stow com `.xinitrc` (barra com data, bateria e volume) e `.Xresources` (paleta Gruvbox completa).
+- `CORES.md` – guia de todas as cores, para configurar sozinho.
 
 ```sh
-doas pkg_add imlib2 dmenu st         # dependencias
-stow chadwm x11                      # cria ~/.config/chadwm, ~/.xinitrc e ~/.Xresources
-cd ~/.config/chadwm/chadwm && make && doas make install   # instala como /usr/local/bin/chadwm
+doas pkg_delete dwm          # se o dwm do pacote estiver instalado
+cd dwm && make && doas make install
+cd .. && stow x11            # cria ~/.xinitrc e ~/.Xresources
 startx
 ```
 
-Ícones da barra pedem a fonte **CaskaydiaCove Nerd Font Mono** (Cascadia em versão Nerd Font) em `~/.fonts`.
-
-O que foi trocado do chadwm original para o OpenBSD:
-
-| Original (Linux) | Aqui |
-|---|---|
-| `pactl` (volume) | `sndioctl` |
-| `light` (brilho) | `xbacklight` |
-| `rofi` e `eww` | `dmenu_run` |
-| `killall` | `pkill` |
-| barra com `/proc` e `/sys` | barra com `sysctl`, `apm`, `sndioctl` e `ifconfig` |
-| caminhos do Linux no `config.mk` | `${X11INC}/freetype2` e `/usr/local` (imlib2) |
-
-Atalhos usam a tecla **Super**: `Super+Enter` terminal, `Super+c` menu, `Super+q` fecha, `Super+1..9` áreas, `Super+Ctrl+q` sai.
+O `config.mk` já usa os caminhos do OpenBSD (`${X11INC}/freetype2`). O terminal (`Alt+Shift+Enter`) é o `st` (`doas pkg_add st`).

@@ -62,6 +62,8 @@ Start
 .TP
 .B Mod1\-p
 Spawn
+.BR dmenu(1)
+for launching other programs.
 .TP
 .B Mod1\-,
 Focus previous screen, if any.
@@ -89,12 +91,6 @@ Sets monocle layout.
 .TP
 .B Mod1\-space
 Toggles between current and previous layout.
-.TP
-.B Mod1\-Control\-,
-Cycles backwards in layout list.
-.TP
-.B Mod1\-Control\-.
-Cycles forwards in layout list.
 .TP
 .B Mod1\-j
 Focus next window.
@@ -145,7 +141,7 @@ View all windows with any tag.
 Add/remove all windows with nth tag to/from the view.
 .TP
 .B Mod1\-Shift\-q
-Restart dwm.
+Quit dwm.
 .SS Mouse commands
 .TP
 .B Mod1\-Button1
@@ -160,6 +156,7 @@ Resize focused window while dragging. Tiled windows will be toggled to the float
 dwm is customized by creating a custom config.h and (re)compiling the source
 code. This keeps it fast, secure and simple.
 .SH SEE ALSO
+.BR dmenu (1),
 .BR st (1)
 .SH ISSUES
 Java applications which use the XToolkit/XAWT backend may draw grey windows

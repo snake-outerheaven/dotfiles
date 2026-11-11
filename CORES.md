@@ -22,52 +22,46 @@ Guia para mexer nas cores sozinho. Tudo usa a paleta **Gruvbox dark** original (
 
 **Normal** é a base. **Clara** é a versão "bright", para dar mais brilho.
 
-## chadwm: `chadwm/.config/chadwm/chadwm/themes/gruvbox.h`
-
-As cores ficam num arquivo de tema, com nomes de cor:
+## dwm: `dwm/config.h`
 
 ```c
-static const char black[]  = "#282828"; // fundo
-static const char white[]  = "#ebdbb2"; // texto
-static const char gray2[]  = "#3c3836"; // borda da janela sem foco
-static const char gray3[]  = "#665c54"; // tags vazias
-static const char yellow[] = "#d79921"; // destaque e borda com foco
-/* ... blue, green, red, orange, pink, aqua */
+static const char col_gray1[] = "#282828"; /* fundo da barra          */
+static const char col_gray2[] = "#504945"; /* borda da janela inativa */
+static const char col_gray3[] = "#ebdbb2"; /* texto da barra          */
+static const char col_gray4[] = "#282828"; /* texto sobre o destaque  */
+static const char col_cyan[]  = "#d79921"; /* destaque: tag ativa, título e borda ativa */
 ```
 
-Quem usa cada nome é a tabela `colors[]` no `config.def.h`:
+Os nomes (`col_gray1`, `col_cyan`) vêm do dwm original. O nome não importa, o valor sim.
 
-| Linha em `colors[]` | O que pinta | Cores (texto, fundo, borda) |
-|---|---|---|
-| `SchemeNorm` | Janela sem foco | `gray3`, `black`, `gray2` |
-| `SchemeSel` | Janela com foco | `gray4`, `yellow`, `yellow` |
-| `SchemeTitle` | Título da janela ativa | `white`, `black` |
-| `SchemeTag1` a `SchemeTag5` | Cor de cada área ocupada (I a V; VI a IX repetem) | amarelo, azul, laranja, verde, ciano |
-| `SchemeLayout` | Símbolo do layout (`[]=`) | `green` |
-| `TabSel` / `TabNorm` | Abas | `yellow` / `gray3` |
+| Variável | Onde aparece |
+|---|---|
+| `col_gray1` | Fundo da barra e das tags inativas |
+| `col_gray2` | Borda das janelas sem foco |
+| `col_gray3` | Texto das tags inativas e do status |
+| `col_gray4` | Texto da tag ativa e do título |
+| `col_cyan` | Fundo da tag ativa, do título e borda da janela com foco |
 
-Para mudar o destaque inteiro, troque o valor de `yellow` no `gruvbox.h`, ou troque `yellow` por outro nome na linha `SchemeSel`.
+O `dmenu` usa as mesmas variáveis (`dmenucmd` no `config.h`).
 
 **Depois de mudar:**
 
 ```sh
-cd ~/.config/chadwm/chadwm && make clean && make && doas make install
+cd dwm && make && doas make install
 ```
 
-Depois `Super+Shift+r` reinicia o chadwm. Atenção: o `make clean` do chadwm apaga o `config.h`. Edite sempre o **`config.def.h`**.
+Saia do dwm (`Alt+Shift+q`) e rode `startx` de novo. O dwm não relê cores sem recompilar.
 
-### Barra: `chadwm/.config/chadwm/scripts/bar_themes/gruvbox`
+### Trocas rápidas de destaque
 
-```sh
-black=#282828
-yellow=#d79921   # relógio
-green=#98971a    # CPU
-red=#cc241d      # bateria
-aqua=#689d6a     # volume
-blue=#458588     # rede
-```
-
-Mudanças na barra valem ao reiniciar o `bar.sh` (ou sair e rodar `startx`).
+| Quer o destaque em | Troque `col_cyan` por |
+|---|---|
+| Amarelo (atual) | `#d79921` |
+| Amarelo claro | `#fabd2f` |
+| Azul | `#458588` |
+| Verde | `#98971a` |
+| Laranja | `#d65d0e` |
+| Discreto, sem cor | `#504945` (e `col_gray4` para `#ebdbb2`) |
 
 ## Terminal: `x11/.Xresources`
 
