@@ -1,0 +1,53 @@
+#!/bin/sh
+# dwm-status - barra do dwm no OpenBSD: volume (sndioctl), bateria (apm/sysctl) e data
+#
+# Uso:  dwm-status &     o .xinitrc ja chama assim
+#       dwm-status -1    imprime a linha uma vez no terminal, para testar
+
+bateria() {
+	pct=$(apm -l 2>/dev/null)
+	case "$pct" in ''|*[!0-9]*) pct= ;; esac
+	# apm sem resposta ou "desconhecido" (255): calcula pelos sensores ACPI
+	if [ -z "$pct" ] || [ "$pct" -gt 100 ]; then
+		cheio=$(sysctl -n hw.sensors.acpibat0.watthour0 2>/dev/null | cut -d' ' -f1)
+		resta=$(sysctl -n hw.sensors.acpibat0.watthour3 2>/dev/null | cut -d' ' -f1)
+		if [ -n "$cheio" ] && [ -n "$resta" ]; then
+			pct=$(echo "$resta $cheio" | awk '{ if ($2 > 0) printf "%d", $1 * 100 / $2 }')
+		fi
+	fi
+	tomada=""
+	[ "$(apm -a 2>/dev/null)" = 1 ] && tomada="+"
+	printf 'bat %s%%%s' "${pct:-?}" "$tomada"
+}
+
+volume() {
+	if [ "$(sndioctl -n output.mute 2>/dev/null)" = 1 ]; then
+		printf 'vol mudo'
+		return
+	fi
+	nivel=$(sndioctl -n output.level 2>/dev/null)
+	if [ -n "$nivel" ]; then
+		printf 'vol %s%%' "$(echo "$nivel" | awk '{ printf "%d", $1 * 100 + 0.5 }')"
+	else
+		printf 'vol ?'
+	fi
+}
+
+data() {
+	date '+%d/%m %H:%M'
+}
+
+linha() {
+	printf ' %s | %s | %s ' "$(volume)" "$(bateria)" "$(data)"
+}
+
+if [ "${1:-}" = "-1" ]; then
+	linha
+	echo
+	exit 0
+fi
+
+while :; do
+	xsetroot -name "$(linha)"
+	sleep 5
+done

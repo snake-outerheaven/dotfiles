@@ -14,7 +14,7 @@ Both accept `--only c,rust,...` / `--skip ...`.
 dwm 6.4 em Gruvbox escuro padrão (destaque amarelo), com fonte Cascadia Code e áreas de trabalho em algarismos romanos (I a IX), configurado para OpenBSD.
 
 - `dwm/` – código-fonte do dwm com o `config.h` pronto. **Não é pacote do stow**: compila e instala.
-- `x11/` – pacote do stow com `.xinitrc` (barra com data, bateria e volume) e `.Xresources` (paleta Gruvbox completa).
+- `x11/` – pacote do stow com `.xinitrc` e `.xsession` (startx ou xenodm), `~/.local/bin/dwm-status` (barra: volume pelo `sndioctl`, bateria pelo `apm` ou sensores ACPI, data; teste com `dwm-status -1`) e `.Xresources` (paleta Gruvbox completa).
 - `CORES.md` – guia de todas as cores, para configurar sozinho.
 
 ```sh
