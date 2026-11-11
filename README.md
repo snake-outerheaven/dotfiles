@@ -25,3 +25,13 @@ startx
 ```
 
 O `config.mk` já usa os caminhos do OpenBSD (`${X11INC}/freetype2`). O terminal (`Alt+Shift+Enter`) é o `st` (`doas pkg_add st`).
+
+### Instalação automática
+
+```sh
+cd dwm
+sh install.sh -n     # simulação: mostra o que faria
+sh install.sh        # instala de verdade
+```
+
+O `install.sh` instala os pacotes (essenciais: `dmenu`, `st`, `stow`; opcionais: `git`, `vim`, `fish`, `starship`, `fastfetch`, `cascadia-code`), compila e instala o dwm, e aplica `x11`, `tmux` e `starship` com o stow. Arquivos que já existirem no `$HOME` vão para `~/.dotfiles-backup-DATA`, nada é apagado. Pacote opcional que falhar vira só aviso.
