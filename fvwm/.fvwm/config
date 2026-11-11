@@ -1,0 +1,97 @@
+# ~/.fvwm/config - fvwm Gruvbox simples (fvwm 2.6+ ou fvwm3)
+# Cores: mesma paleta do dwm (ver CORES.md). Destaque: #b57614.
+
+DefaultFont "xft:Cascadia Code:size=10"
+DesktopSize 1x1
+EdgeScroll 0 0
+ClickTime 250
+EwmhBaseStruts 0 0 0 0
+
+# ---- cores (Colorset N fg texto, bg fundo, hi luz, sh sombra) ----
+Colorset 0 fg #a89984, bg #3c3836, hi #3c3836, sh #3c3836   # janela sem foco
+Colorset 1 fg #282828, bg #b57614, hi #b57614, sh #b57614   # janela com foco
+Colorset 2 fg #ebdbb2, bg #282828, hi #504945, sh #1d2021   # menu
+Colorset 3 fg #282828, bg #b57614                           # item do menu selecionado
+Colorset 4 fg #ebdbb2, bg #282828                           # pager
+Colorset 5 fg #282828, bg #b57614                           # area atual no pager
+
+# ---- janelas: visual plano ----
+Style * Colorset 0, HilightColorset 1
+Style * BorderColorset 0, HilightBorderColorset 1
+Style * BorderWidth 3, HandleWidth 3
+Style * ClickToFocus, MinOverlapPlacement, ResizeOpaque
+TitleStyle Centered Height 22 -- Flat
+BorderStyle -- Flat
+ButtonStyle All -- Flat UseTitleStyle
+
+# botao 2 (direita): fechar, desenhado como X
+ButtonStyle 2 Vector 4 30x30@3 70x70@3 30x70@4 70x30@3
+# botao 4 (direita): maximizar, desenhado como quadrado
+ButtonStyle 4 Vector 5 30x30@3 70x30@3 70x70@3 30x70@3 30x30@3
+
+# ---- menus ----
+MenuStyle * MenuColorset 2, ActiveColorset 3, Hilight3DOff
+MenuStyle * BorderWidth 1, Font "xft:Cascadia Code:size=10"
+
+DestroyMenu MenuRaiz
+AddToMenu MenuRaiz "fvwm" Title
++ "Terminal"        Exec exec st
++ "Firefox"         Exec exec firefox
++ "Programas"       Exec exec dmenu_run -fn "Cascadia Code:size=10" -nb "#282828" -nf "#ebdbb2" -sb "#b57614" -sf "#282828"
++ ""                Nop
++ "Reiniciar fvwm"  Restart
++ "Sair"            Quit
+
+DestroyMenu MenuJanela
+AddToMenu MenuJanela
++ "Maximizar"  Maximize
++ "Minimizar"  Iconify
++ "Fixar no topo" Layer 0 6
++ ""           Nop
++ "Fechar"     Close
+
+# ---- areas de trabalho I a IV ----
+DesktopName 0 I
+DesktopName 1 II
+DesktopName 2 III
+DesktopName 3 IV
+
+# ---- inicio ----
+DestroyFunc StartFunction
+AddToFunc StartFunction
++ I Exec exec xrdb -merge $HOME/.Xresources
++ I Exec exec xsetroot -solid "#282828"
++ I Module FvwmPager 0 3
+
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Geometry 200x40-10-10
+*FvwmPager: Colorset * 4
+*FvwmPager: HilightColorset * 5
+*FvwmPager: Font "xft:Cascadia Code:size=9"
+*FvwmPager: SmallFont none
+*FvwmPager: Rows 1
+Style FvwmPager !Title, !Borders, Sticky, StaysOnTop, WindowListSkip, CirculateSkip
+
+# ---- mouse ----
+Mouse 1 R A Menu MenuRaiz              # clique esquerdo no fundo: menu
+Mouse 1 2 A Close                       # botao X: fecha
+Mouse 1 4 A Maximize                    # botao quadrado: maximiza
+Mouse 3 T A Menu MenuJanela             # direito no titulo: menu da janela
+Mouse 1 T A Move                        # arrastar o titulo: move
+Mouse 1 W M Move                        # Alt + arrastar: move
+Mouse 3 W M Resize                      # Alt + botao direito: redimensiona
+
+# ---- teclado (Alt = M) ----
+Key Return A M Exec exec st             # Alt+Enter: terminal
+Key p      A M Exec exec dmenu_run -fn "Cascadia Code:size=10" -nb "#282828" -nf "#ebdbb2" -sb "#b57614" -sf "#282828"
+Key q      A M Close                    # Alt+q: fecha
+Key f      A M Maximize                 # Alt+f: maximiza / volta
+Key Tab    A M WindowList               # Alt+Tab: lista de janelas
+Key 1      A M GotoDesk 0 0             # Alt+1..4: vai para a area
+Key 2      A M GotoDesk 0 1
+Key 3      A M GotoDesk 0 2
+Key 4      A M GotoDesk 0 3
+Key 1      A SM MoveToDesk 0 0          # Alt+Shift+1..4: manda a janela
+Key 2      A SM MoveToDesk 0 1
+Key 3      A SM MoveToDesk 0 2
+Key 4      A SM MoveToDesk 0 3

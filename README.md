@@ -35,3 +35,15 @@ sh install.sh        # instala de verdade
 ```
 
 O `install.sh` instala os pacotes (essenciais: `dmenu`, `st`, `stow`; opcionais: `git`, `vim`, `fish`, `starship`, `fastfetch`, `cascadia-code`), compila e instala o dwm, e aplica `x11`, `tmux` e `starship` com o stow. Arquivos que já existirem no `$HOME` vão para `~/.dotfiles-backup-DATA`, nada é apagado. Pacote opcional que falhar vira só aviso.
+
+## fvwm (alternativa ao dwm)
+
+`fvwm/` – pacote do stow com `~/.fvwm/config`: Gruvbox simples, visual plano, destaque `#b57614`, menu no clique do fundo, pager com áreas I a IV e atalhos com `Alt` (`Alt+Enter` terminal, `Alt+p` dmenu, `Alt+q` fecha, `Alt+f` maximiza, `Alt+1..4` áreas).
+
+```sh
+stow --no-folding fvwm
+# no ~/.xinitrc, troque "exec dwm" por:
+exec fvwm
+```
+
+Feito para fvwm 2.6+ ou fvwm3 (usa `Colorset`). O fvwm da base do OpenBSD é antigo: confira com `fvwm -version` e, se for 2.2, use o pacote mais novo (`pkg_info -Q fvwm`).
