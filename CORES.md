@@ -89,18 +89,39 @@ O `*.` no começo faz a cor valer para qualquer programa que lê o Xresources (x
 ## cwm: `~/.cwmrc` (se usar o cwm)
 
 ```
-color activeborder   "#d79921"   # janela com foco
+color activeborder   "#b57614"   # janela com foco (mesmo destaque do dwm)
 color inactiveborder "#504945"   # janelas sem foco
 color urgencyborder  "#cc241d"   # janela pedindo atenção
 color groupborder    "#458588"
 color ungroupborder  "#3c3836"
 color menubg         "#282828"   # fundo do menu
-color menufg         "#d79921"   # item selecionado
+color menufg         "#b57614"   # item selecionado
 color font           "#ebdbb2"   # texto do menu
 color selfont        "#282828"   # texto do item selecionado
 ```
 
 O cwm relê o arquivo sem reiniciar: menu do `cwm` → `restart`, ou `pkill -HUP cwm`.
+
+## tmux: `tmux/.tmux.conf`
+
+| Opção | Cor | Papel |
+|---|---|---|
+| `status-style` | fundo `#282828`, texto `#a89984` | Barra |
+| nome da sessão | `#98971a` | Verde normal |
+| relógio | `#d79921` | Amarelo normal |
+| título do painel | `#689d6a` | Ciano normal |
+| janela atual | fundo `#b57614`, texto `#282828` | Mesmo destaque do dwm |
+| bordas | `#3c3836`, ativa `#b57614` | Divisões |
+
+Aplicar: `Ctrl+b r` (recarrega a config).
+
+## Prompt: `starship/.config/starship.toml`
+
+A paleta `gruvbox_dark` define os nomes `red`, `green`, `blue`, `purple` etc. com as cores **claras** do Gruvbox, que leem melhor no fundo escuro. Os módulos usam esses nomes (`style = "blue bold"`). Para mudar uma cor do prompt, troque o hex na paleta.
+
+## vim e fish
+
+Não têm cor própria: usam as 16 cores do terminal. Como o `.Xresources` já é Gruvbox, eles saem em Gruvbox. Se um dia quiser um tema de vim, o Vim 9 traz o `retrobox`, inspirado no Gruvbox (`:colorscheme retrobox`).
 
 ## Fundo da tela
 
@@ -115,7 +136,7 @@ Troque por `#1d2021` para um fundo mais escuro.
 ## Testar uma cor antes
 
 ```sh
-printf '\033[48;2;215;153;33m        \033[0m\n'   # mostra #d79921 (215,153,33 em decimal)
+printf '\033[48;2;181;118;20m        \033[0m\n'   # mostra #b57614 (181,118,20 em decimal)
 ```
 
-Para converter hex em decimal: `d7` = 215, `99` = 153, `21` = 33.
+Para converter hex em decimal: `b5` = 181, `76` = 118, `14` = 20.
